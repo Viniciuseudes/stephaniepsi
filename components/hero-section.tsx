@@ -57,9 +57,9 @@ export function HeroSection() {
               {" "}
               {/* Adicionado text-center lg:text-left */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-tight">
-                Te levo ao{" "}
+                Te levo ao bom{" "}
                 <span className="text-primary relative inline-block">
-                  autoconhecimento
+                  relacionamento
                   <svg
                     className="absolute -bottom-1 left-0 w-full"
                     height="8"
@@ -76,13 +76,14 @@ export function HeroSection() {
                     />
                   </svg>
                 </span>{" "}
-                através da psicoterapia!
+                , consigo e com os outros através da psicoterapia!
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
                 {" "}
                 {/* Adicionado mx-auto lg:mx-0 */}
-                Psicóloga clínica e educacional, especializada em ajudar você a
-                descobrir seu potencial e viver com mais equilíbrio emocional.
+                Sou o apoio que te ajuda no fortalecimento de quem você é,
+                ausilio a melhorar seus relacionamentos e se posicionar com mais
+                clareza e tranquilidade.
               </p>
             </div>
 

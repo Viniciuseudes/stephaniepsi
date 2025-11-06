@@ -76,8 +76,9 @@ export function BlogSection({ latestPosts }: BlogSectionProps) {
         <div className="text-center space-y-4 mb-16 animate-in fade-in slide-in-from-bottom duration-700">
           <h2 className="text-4xl md:text-5xl font-bold text-balance">Blog</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Artigos e reflexões sobre psicologia, saúde mental e desenvolvimento
-            pessoal
+            Te apresento conteúdos especializados em saúde mental,
+            relacionamentos, autoconhecimento, psicoterapia e bem-estar.
+            Aproveite!
           </p>
         </div>
 

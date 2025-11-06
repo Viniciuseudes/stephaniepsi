@@ -11,27 +11,27 @@ export function ApproachesSection() {
   const approaches = [
     {
       icon: Brain,
-      title: "Terapia Cognitivo-Comportamental",
+      title: "Psicoterapia Individual",
       description:
-        "Trabalho com pensamentos, emoções e comportamentos para promover mudanças positivas e duradouras.",
+        "Na sessão você terá um espaço para falar e compartilhar suas questões, com intervenções leves e assertivas. Meu objetivo é entender melhor o que você está passando, aprofundar essa compreensão e, juntos encontrarmos maneiras de lidar com o sofrimento.",
     },
     {
       icon: Heart,
-      title: "Abordagem Humanista",
+      title: "Consulta de Urgência",
       description:
-        "Foco no potencial humano, autoconhecimento e desenvolvimento pessoal através de uma escuta empática.",
+        "Também chamada de Plantão Psicológico, é uma sessão que não precisa de agendamento antecipado. Ela exite para atender pessoas que estão passando por crises ou momentos de emergência emocional.",
     },
     {
       icon: Users,
-      title: "Psicologia Educacional",
+      title: "Treinamento e Palestras",
       description:
-        "Apoio a estudantes, pais e educadores no processo de aprendizagem e desenvolvimento.",
+        "Ofereço capacitações técnicas sob medida para sua empresa ou equipe, levando em conta suas necessidades e situação. Minha abordagem combina teoria e prática para atingir cada objetivo de forma eficaz.",
     },
     {
       icon: Sparkles,
-      title: "Terapia Integrativa",
+      title: "Acessoria e Consultoria Escolar",
       description:
-        "Combinação de diferentes abordagens para criar um tratamento personalizado e eficaz.",
+        "Ofereço suporte técnico para questões relacionadas ao ensino e aprendizagem, inclusão, comportamento e emoções, especialmente diante das mudanças sociais que as instituições têm enfrentado atualmente. Meu trabalho inclui visitas com objetivos definidos previamente, sempre levando em conta a necessidade do momento. Essas visitas podem envolver acolhimento aos alunos e suas famílias, orientação à equipe escolar ou a implementação de projetos e intervenções em sala de aula. Tudo é pensado e adaptado para a realidade da sua escola",
     },
   ];
 
@@ -51,7 +51,7 @@ export function ApproachesSection() {
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-balance">
-            Abordagens Terapêuticas
+            Meus Serviços
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Utilizo diferentes abordagens para oferecer um atendimento

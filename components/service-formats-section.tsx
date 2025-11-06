@@ -1,37 +1,50 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Video, MapPin, Clock } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card";
+import { Video, MapPin, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import Image from "next/image";
 
 export function ServiceFormatsSection() {
-  const [showOffice, setShowOffice] = useState(false)
+  const [showOffice, setShowOffice] = useState(false);
 
   const formats = [
     {
       icon: Video,
       title: "Atendimento Online",
-      description: "Sessões por videochamada com toda a privacidade e conforto da sua casa. Flexibilidade de horários.",
-      features: ["Plataforma segura", "Horários flexíveis", "Conforto do seu lar"],
+      description:
+        "Pensada para a praticidade e no conforto do seu espaço viável para sessão. A Psicoterapia ou consulta de emergência online tem a mesma entrega e qualidade do presencial com mais flexibilidade de horário, sessão por videochamada e contato virtual via Whatsapp.",
+      features: [
+        "Plataforma segura",
+        "Horários flexíveis",
+        "Conforto do seu lar",
+      ],
     },
     {
       icon: MapPin,
       title: "Atendimento Presencial",
-      description: "Consultório acolhedor e confortável, localizado em região de fácil acesso.",
+      description:
+        "Pensada para um melhor acolhimento, aqui no consultório terá o conforto do espaço, segurança para falar com privacidade e sigilo, além do  ambiente sem interrupções.",
       features: ["Ambiente acolhedor", "Fácil acesso", "Estacionamento"],
       location: "Rua da Saudade, 762 - Lagoa Nova, Natal-RN",
     },
-  ]
+  ];
 
   return (
-    <section id="atendimento" className="py-20 md:py-32 bg-secondary/30" style={{ backgroundColor: "#dfccb8" }}>
+    <section
+      id="atendimento"
+      className="py-20 md:py-32 bg-secondary/30"
+      style={{ backgroundColor: "#dfccb8" }}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-16 animate-in fade-in slide-in-from-bottom duration-700">
-          <h2 className="text-4xl md:text-5xl font-bold text-balance">Formas de Atendimento</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-balance">
+            Psicoterapia e Consulta de Urgência:
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Escolha a modalidade que melhor se adapta à sua rotina e necessidades
+            Escolha a modalidade que melhor se adapta à sua rotina e
+            necessidades
           </p>
         </div>
 
@@ -49,7 +62,9 @@ export function ServiceFormatsSection() {
 
                 <div className="space-y-3">
                   <h3 className="text-2xl font-bold">{format.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{format.description}</p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {format.description}
+                  </p>
                 </div>
 
                 <ul className="space-y-2">
@@ -64,10 +79,20 @@ export function ServiceFormatsSection() {
                 {format.location && (
                   <div className="pt-4 border-t border-border space-y-4">
                     <div className="flex items-start gap-3">
-                      <MapPin className="text-primary flex-shrink-0 mt-1" size={20} />
-                      <p className="text-sm text-muted-foreground">{format.location}</p>
+                      <MapPin
+                        className="text-primary flex-shrink-0 mt-1"
+                        size={20}
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        {format.location}
+                      </p>
                     </div>
-                    <Button variant="outline" size="sm" onClick={() => setShowOffice(!showOffice)} className="w-full">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowOffice(!showOffice)}
+                      className="w-full"
+                    >
                       {showOffice ? "Ocultar Espaço" : "Conhecer Espaço"}
                     </Button>
                   </div>
@@ -131,5 +156,5 @@ export function ServiceFormatsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
