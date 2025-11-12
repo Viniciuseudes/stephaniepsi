@@ -41,7 +41,8 @@ export function ExperienceSection() {
 
         <div
           ref={statsAnimation.ref}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          // MUDANÇA AQUI: Adicionado "grid-cols-2" para ser o padrão (mobile)
+          className="grid grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {stats.map((stat, index) => (
             <div

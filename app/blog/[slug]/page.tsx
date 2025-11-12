@@ -15,6 +15,7 @@ import { ptBR } from "date-fns/locale";
 import { Calendar } from "lucide-react";
 import type { Post } from "@/types"; // Importar tipo Post se ainda não estiver
 import type { Image as SanityImage } from "@sanity/types"; // Importar tipo de imagem do Sanity
+import { ShareButtons } from "@/components/share-buttons"; // <-- 1. IMPORTAR O NOVO COMPONENTE
 
 // Gera as rotas estáticas para cada post no build time
 export async function generateStaticParams() {
@@ -137,6 +138,9 @@ export default async function PostPage({
                 <span>{formattedDate}</span>
               </div>
             </div>
+
+            {/* <-- 2. ADICIONAR O COMPONENTE AQUI --> */}
+            <ShareButtons title={post.title} summary={post.excerpt} />
 
             {post.mainImage && (
               <div className="relative mb-8 aspect-[16/9] rounded-lg overflow-hidden">

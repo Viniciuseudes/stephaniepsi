@@ -1,8 +1,17 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Heart, Users, Sparkles } from "lucide-react";
+import { Brain, Heart, Users, Sparkles, ArrowRight } from "lucide-react"; // Importar ArrowRight
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { cn } from "@/lib/utils"; // Importar cn
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"; // Importar Dialog
+import { Button } from "@/components/ui/button"; // Importar Button
 
 export function ApproachesSection() {
   const titleAnimation = useScrollAnimation({ threshold: 0.3 });
@@ -66,31 +75,57 @@ export function ApproachesSection() {
           {approaches.map((approach, index) => (
             <Card
               key={index}
-              /* Adicionado mt-7 (metade da altura do ícone) e relative */
-              className={`relative mt-7 group hover:shadow-xl transition-all duration-700 hover:-translate-y-2 border-2 hover:border-primary/50 ${
+              /* Adicionado flex flex-col para forçar altura igual */
+              className={cn(
+                "relative mt-7 group hover:shadow-xl transition-all duration-700 hover:-translate-y-2 border-2 hover:border-primary/50 flex flex-col", // <-- Adicionado flex flex-col
                 cardsAnimation.isVisible
                   ? "opacity-100 translate-y-0 scale-100"
                   : "opacity-0 translate-y-12 scale-95"
-              }`}
+              )}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              {/* Movido o container do ícone para fora do CardContent e adicionado posicionamento absoluto */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                 <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors border-4 border-background">
-                  {" "}
-                  {/* Adicionado border-4 border-background */}
                   <approach.icon className="text-primary" size={28} />
                 </div>
               </div>
 
-              {/* Adicionado pt-10 para compensar o espaço do ícone */}
-              <CardContent className="p-6 pt-10 space-y-4 text-center">
-                {" "}
-                {/* Adicionado text-center */}
+              {/* Adicionado flex flex-col flex-grow */}
+              <CardContent className="p-6 pt-10 space-y-4 text-center flex flex-col flex-grow">
                 <h3 className="text-xl font-bold">{approach.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
+
+                {/* Adicionado line-clamp-6 (trunca em 6 linhas) e flex-grow */}
+                <p className="text-muted-foreground leading-relaxed line-clamp-6 flex-grow">
                   {approach.description}
                 </p>
+
+                {/* Adicionado wrapper com mt-auto para empurrar para baixo */}
+                <div className="mt-auto pt-2">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="link"
+                        className="text-primary p-0 h-auto justify-center group text-sm"
+                      >
+                        Ler mais
+                        <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-lg">
+                      <DialogHeader>
+                        <DialogTitle className="text-left text-2xl">
+                          {approach.title}
+                        </DialogTitle>
+                      </DialogHeader>
+                      <div className="py-4 text-muted-foreground leading-relaxed text-left max-h-[60vh] overflow-y-auto">
+                        {/* whiteSpace preserva as quebras de linha do texto original */}
+                        <p style={{ whiteSpace: "pre-line" }}>
+                          {approach.description}
+                        </p>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </CardContent>
             </Card>
           ))}

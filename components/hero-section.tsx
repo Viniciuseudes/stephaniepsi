@@ -19,7 +19,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 md:pt-32 md:pb-16" // <-- MUDANÇA 1: h-screen para min-h-screen e ajuste de padding
       style={{ backgroundColor: "#dfccb8" }}
     >
       <div className="absolute inset-0 -z-10">
@@ -27,7 +27,9 @@ export function HeroSection() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
-      <div className="container mx-auto px-4 py-8 md:py-10 max-h-full">
+      <div className="container mx-auto px-4 max-h-full">
+        {" "}
+        {/* <-- MUDANÇA 2: Removido py-8 md:py-10 */}
         {/* Alterado para items-start para alinhar colunas ao topo */}
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start max-h-full">
           {/* Alterado para flex flex-col items-center lg:items-start */}
@@ -45,9 +47,9 @@ export function HeroSection() {
                 <Image
                   src="/images/logo-circular.png"
                   alt="Stephanie Barbosa - Psicóloga"
-                  width={180}
-                  height={180}
-                  className="w-32 h-32 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain animate-in zoom-in duration-700"
+                  width={160} // <-- MUDANÇA 3: Reduzido (era 180)
+                  height={160} // <-- MUDANÇA 3: Reduzido (era 180)
+                  className="w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-contain animate-in zoom-in duration-700" // <-- MUDANÇA 3: Reduzido (era w-32 ... lg:w-44)
                   priority
                 />
               </div>
@@ -76,7 +78,7 @@ export function HeroSection() {
                     />
                   </svg>
                 </span>{" "}
-                , consigo e com os outros através da psicoterapia!
+                consigo e com os outros através da psicoterapia!
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0">
                 {" "}
