@@ -10,9 +10,9 @@ export function ExperienceSection() {
 
   const stats = [
     { icon: Award, value: "8+", label: "Anos de Experiência" },
-    { icon: Users, value: "500+", label: "Pacientes Atendidos" },
-    { icon: BookOpen, value: "15+", label: "Workshops Realizados" },
-    { icon: TrendingUp, value: "95%", label: "Taxa de Satisfação" },
+    { icon: Users, value: "870+", label: "Pacientes Atendidos" },
+    { icon: BookOpen, value: "30+", label: "Workshops Realizados" },
+    { icon: TrendingUp, value: "98%", label: "Taxa de Satisfação" },
   ];
 
   return (

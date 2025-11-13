@@ -84,7 +84,7 @@ export function HeroSection() {
                 {" "}
                 {/* Adicionado mx-auto lg:mx-0 */}
                 Sou o apoio que te ajuda no fortalecimento de quem você é,
-                ausilio a melhorar seus relacionamentos e se posicionar com mais
+                auxilio a melhorar seus relacionamentos e se posicionar com mais
                 clareza e tranquilidade.
               </p>
             </div>

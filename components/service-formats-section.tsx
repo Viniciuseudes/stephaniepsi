@@ -14,7 +14,7 @@ export function ServiceFormatsSection() {
       icon: Video,
       title: "Atendimento Online",
       description:
-        "Pensada para a praticidade e no conforto do seu espaço viável para sessão. A Psicoterapia ou consulta de emergência online tem a mesma entrega e qualidade do presencial com mais flexibilidade de horário, sessão por videochamada e contato virtual via Whatsapp.",
+        "Pensando na praticidade e no conforto do seu espaço viável para sessão. A Psicoterapia ou consulta de emergência online tem a mesma entrega e qualidade do presencial com mais flexibilidade de horário, sessão por videochamada e contato virtual via Whatsapp.",
       features: [
         "Plataforma segura",
         "Horários flexíveis",

@@ -5,15 +5,26 @@ import { ApproachesSection } from "@/components/approaches-section";
 import { ExperienceSection } from "@/components/experience-section";
 import { ServiceFormatsSection } from "@/components/service-formats-section";
 import { WorkshopsSection } from "@/components/workshops-section";
-import { BlogSection } from "@/components/blog-section"; // Importar o componente
+import { BlogSection } from "@/components/blog-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Header } from "@/components/header";
-import { getLatestBlogPosts } from "@/lib/sanity.queries"; // Importar função de busca
+// 1. ATUALIZAR IMPORTS
+import {
+  getLatestBlogPosts,
+  getNextWorkshop,
+  getPastWorkshops,
+} from "@/lib/sanity.queries";
 
 export default async function Home() {
-  const latestPosts = await getLatestBlogPosts(); // Buscar os posts recentes
+  const latestPosts = await getLatestBlogPosts();
+
+  // --- MINHAS ADIÇÕES ---
+  // 2. Buscar dados dos workshops
+  const nextWorkshop = await getNextWorkshop();
+  const pastWorkshops = await getPastWorkshops();
+  // --- FIM DAS ADIÇÕES ---
 
   return (
     <main className="min-h-screen">
@@ -23,8 +34,10 @@ export default async function Home() {
       <ApproachesSection />
       <ExperienceSection />
       <ServiceFormatsSection />
-      <WorkshopsSection />
-      {/* Passar os posts como prop */}
+
+      {/* 3. Passar os dados do workshop como props */}
+      <WorkshopsSection {...({ nextWorkshop, pastWorkshops } as any)} />
+
       <BlogSection latestPosts={latestPosts} />
       <TestimonialsSection />
       <Footer />

@@ -12,12 +12,7 @@ export function AboutSection() {
   });
   const highlightsAnimation = useScrollAnimation({ threshold: 0.3 });
 
-  const highlights = [
-    "Psicóloga Clínica e Educacional",
-    "Especialista em Autoconhecimento",
-    "Atendimento Humanizado",
-    "Abordagem Integrativa",
-  ];
+  const highlights: string[] = [];
 
   return (
     <section
@@ -38,7 +33,7 @@ export function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PHOTO-2025-08-27-20-30-17-jyDw3PiJvZRsYwzWwnYIHNLMplqwgu.jpg"
+                src="/essa.jpeg"
                 alt="Stephanie Barbosa"
                 width={600}
                 height={800}
@@ -89,8 +84,8 @@ export function AboutSection() {
               <p>
                 Sou Colérica/melancólica, amo praia e nasci no lugar certo pra
                 isso Natal/RN. Amante de bons livros e ideias interressantes. E
-                falando e boas histórias também curto filmes e séries. Movida a
-                música e estudante por hobbie. Amo transformações e desejo te
+                falando em boas histórias, também curto filmes e séries. Movida
+                a música e estudante por hobbie. Amo transformações e desejo te
                 ajudar no que for possível. Até logo.
               </p>
             </div>

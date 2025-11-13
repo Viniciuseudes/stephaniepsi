@@ -1,7 +1,7 @@
 // lib/sanity.queries.ts
-import { groq } from 'next-sanity' // Pode precisar instalar: npm install next-sanity
+import { groq } from 'next-sanity'
 import { client } from './sanity.client'
-import type { Post } from '@/types' // Ajuste o caminho se necessário
+import type { Post, Workshop } from '@/types' // 1. Importar o tipo Workshop
 
 export const postsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) {
@@ -41,3 +41,30 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 export async function getAllPostSlugs(): Promise<string[]> {
   return await client.fetch(postSlugsQuery) || []
 }
+
+// --- MINHAS ADIÇÕES ---
+
+// 2. Query para buscar o próximo workshop (status == 'proximo')
+export const nextWorkshopQuery = groq`
+  *[_type == "workshop" && status == "proximo"] | order(date asc) [0] {
+    _id, title, mainImage, description, date, spots, modality, status, buttonLink
+  }
+`
+
+// 3. Query para buscar workshops passados (status == 'encerrado')
+export const pastWorkshopsQuery = groq`
+  *[_type == "workshop" && status == "encerrado"] | order(date desc) [0...4] {
+    _id, title
+  }
+`
+
+// 4. Função para buscar o próximo workshop
+export async function getNextWorkshop(): Promise<Workshop | null> {
+  return await client.fetch(nextWorkshopQuery)
+}
+
+// 5. Função para buscar workshops passados
+export async function getPastWorkshops(): Promise<{_id: string, title: string}[]> {
+  return await client.fetch(pastWorkshopsQuery) || []
+}
+// --- FIM DAS ADIÇÕES ---
