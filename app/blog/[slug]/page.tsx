@@ -102,6 +102,39 @@ export default async function PostPage({
     ? format(new Date(post.publishedAt), "d 'de' MMMM, yyyy", { locale: ptBR })
     : "Data inválida";
 
+  // --- AJUSTE: URL da imagem principal para o schema ---
+  const mainImageUrl = post.mainImage
+    ? urlFor(post.mainImage)
+        .width(1200)
+        .height(630)
+        .fit("crop")
+        .auto("format")
+        .url()
+    : "";
+
+  // --- AJUSTE: Definição do Schema.org para o Artigo ---
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: mainImageUrl,
+    datePublished: post.publishedAt,
+    author: {
+      "@type": "Person",
+      name: "Stephanie Barbosa",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Stephanie Barbosa Psicóloga",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://psistephaniebarbosa.com/images/logo-circular.png", //
+      },
+    },
+  };
+  // --- FIM DO AJUSTE ---
+
   return (
     <>
       <Header />
@@ -111,6 +144,15 @@ export default async function PostPage({
       >
         <div className="container mx-auto px-4 max-w-3xl">
           <article>
+            {/* --- AJUSTE: Inserindo o script JSON-LD --- */}
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(schema),
+              }}
+            />
+            {/* --- FIM DO AJUSTE --- */}
+
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-foreground text-balance">
               {post.title}
             </h1>

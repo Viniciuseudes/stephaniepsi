@@ -38,7 +38,7 @@ export function ApproachesSection() {
     },
     {
       icon: Sparkles,
-      title: "Acessoria e Consultoria Escolar",
+      title: "Assessoria e Consultoria Escolar",
       description:
         "Ofereço suporte técnico para questões relacionadas ao ensino e aprendizagem, inclusão, comportamento e emoções, especialmente diante das mudanças sociais que as instituições têm enfrentado atualmente. Meu trabalho inclui visitas com objetivos definidos previamente, sempre levando em conta a necessidade do momento. Essas visitas podem envolver acolhimento aos alunos e suas famílias, orientação à equipe escolar ou a implementação de projetos e intervenções em sala de aula. Tudo é pensado e adaptado para a realidade da sua escola",
     },
