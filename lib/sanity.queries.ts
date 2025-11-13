@@ -5,18 +5,21 @@ import type { Post } from '@/types' // Ajuste o caminho se necessário
 
 export const postsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) {
-    _id, title, slug, mainImage, category, publishedAt, excerpt, body
+    _id, title, slug, mainImage, category, publishedAt, excerpt, body,
+    likes // <-- ADICIONEI AQUI
   }
 `
 
 export const latestPostsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) [0...3] {
-     _id, title, slug, mainImage, category, publishedAt, excerpt
+     _id, title, slug, mainImage, category, publishedAt, excerpt,
+     likes // <-- ADICIONEI AQUI
   }
 `
- export const postBySlugQuery = groq`
+export const postBySlugQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
-     _id, title, slug, mainImage, category, publishedAt, excerpt, body
+     _id, title, slug, mainImage, category, publishedAt, excerpt, body,
+     likes // <-- ADICIONEI AQUI
   }
  `
 export const postSlugsQuery = groq`
@@ -28,12 +31,12 @@ export async function getAllBlogPosts(): Promise<Post[]> {
 }
 
 export async function getLatestBlogPosts(): Promise<Post[]> {
-   return await client.fetch(latestPostsQuery)
+  return await client.fetch(latestPostsQuery)
 }
 
- export async function getPostBySlug(slug: string): Promise<Post | null> {
-   return await client.fetch(postBySlugQuery, { slug })
- }
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  return await client.fetch(postBySlugQuery, { slug })
+}
 
 export async function getAllPostSlugs(): Promise<string[]> {
   return await client.fetch(postSlugsQuery) || []

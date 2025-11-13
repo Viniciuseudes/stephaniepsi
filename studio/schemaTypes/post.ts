@@ -1,4 +1,4 @@
-// studio/schemaTypes/post.ts (ou similar)
+// studio/schemaTypes/post.ts
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
@@ -31,18 +31,28 @@ export default defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-     defineField({
+    defineField({
       name: 'category',
       title: 'Categoria',
       type: 'string', // Simples por enquanto, pode ser referência a outro schema depois
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-       name: 'publishedAt',
-       title: 'Data de Publicação',
-       type: 'datetime',
-       validation: (Rule) => Rule.required(),
-     }),
+      name: 'publishedAt',
+      title: 'Data de Publicação',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
+    }),
+    // --- CAMPO MODIFICADO ---
+    defineField({
+      name: 'likes',
+      title: 'Curtidas',
+      type: 'number',
+      initialValue: 0, // Garante que novos posts comecem com 0
+      readOnly: true, // Impede a edição manual no Sanity Studio
+      // Removida a validação 'required()' para não dar erro em posts antigos
+    }),
+    // --- FIM DA MODIFICAÇÃO ---
     defineField({
       name: 'excerpt',
       title: 'Resumo (Excerto)',
@@ -56,18 +66,11 @@ export default defineType({
       type: 'blockContent', // Tipo especial para texto rico (parágrafos, negrito, listas, etc.)
       validation: (Rule) => Rule.required(),
     }),
-    // O template pode incluir 'author' e 'tags', remova ou ajuste se não for usar
   ],
   preview: {
     select: {
       title: 'title',
-      // author: 'author.name', // Remova ou comente se não usar autor
       media: 'mainImage',
     },
-    // prepare(selection) { // Remova ou comente se não usar autor
-    //   const {author} = selection
-    //   return {...selection, subtitle: author && `by ${author}`}
-    // },
   },
 })
-

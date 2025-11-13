@@ -40,12 +40,10 @@ export function ShareButtons({ title, summary, className }: ShareButtonsProps) {
   };
 
   return (
-    <div
-      className={cn("flex items-center justify-center gap-2 mb-8", className)}
-    >
-      <span className="text-sm font-medium text-muted-foreground mr-2">
-        Compartilhar:
-      </span>
+    // --- MUDANÇA AQUI ---
+    // Removi 'justify-center' e 'mb-8' para que o componente pai controle o alinhamento e margem
+    <div className={cn("flex items-center gap-2", className)}>
+      {/* O <span>"Compartilhar:"</span> foi removido daqui e movido para a página */}
 
       {/* WhatsApp */}
       <Button

@@ -11,4 +11,5 @@ export interface Post {
   publishedAt: string; // ISO date string
   excerpt: string;
   body: any[]; // Portable Text content
+  likes: number;
 }

@@ -4,7 +4,6 @@ import { Footer } from "@/components/footer";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
 import Image from "next/image";
-// Importar o componente e o TIPO
 import {
   PortableText,
   type PortableTextReactComponents,
@@ -13,9 +12,10 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar } from "lucide-react";
-import type { Post } from "@/types"; // Importar tipo Post se ainda não estiver
-import type { Image as SanityImage } from "@sanity/types"; // Importar tipo de imagem do Sanity
-import { ShareButtons } from "@/components/share-buttons"; // <-- 1. IMPORTAR O NOVO COMPONENTE
+import type { Post } from "@/types";
+import type { Image as SanityImage } from "@sanity/types";
+import { ShareButtons } from "@/components/share-buttons";
+import { LikeButton } from "@/components/like-button";
 
 // Gera as rotas estáticas para cada post no build time
 export async function generateStaticParams() {
@@ -23,29 +23,25 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-// Tipar explicitamente o objeto de componentes
+// Componentes do PortableText (sem alteração)
 const ptComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }: { value: SanityImage & { alt?: string } }) => {
-      // Usar tipo importado
       if (!value?.asset?._ref) {
         return null;
       }
       return (
         <div className="relative my-6 aspect-video">
-          {" "}
-          {/* Ou outra proporção */}
           <Image
             src={urlFor(value).fit("max").auto("format").url()}
             alt={value.alt || "Imagem do post"}
             fill
-            className="object-contain" // ou object-cover
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 700px"
           />
         </div>
       );
     },
-    // Pode adicionar mais customizações aqui (ex: code blocks)
   },
   marks: {
     link: ({
@@ -55,10 +51,8 @@ const ptComponents: Partial<PortableTextReactComponents> = {
       children: React.ReactNode;
       value?: { href?: string };
     }) => {
-      // Tipar value opcionalmente
       const href = value?.href;
-      if (!href) return <>{children}</>; // Retornar children se não houver href
-
+      if (!href) return <>{children}</>;
       const rel = !href.startsWith("/") ? "noreferrer noopener" : undefined;
       return (
         <a href={href} rel={rel} className="text-primary hover:underline">
@@ -66,7 +60,6 @@ const ptComponents: Partial<PortableTextReactComponents> = {
         </a>
       );
     },
-    // Pode adicionar mais customizações (strong, em, etc.)
   },
   block: {
     h2: ({ children }) => (
@@ -88,12 +81,9 @@ const ptComponents: Partial<PortableTextReactComponents> = {
     bullet: ({ children }) => (
       <ul className="list-disc pl-6 my-4 space-y-2">{children}</ul>
     ),
-    // Pode adicionar 'number' para listas numeradas se usar no Sanity
-    // number: ({children}) => <ol className="list-decimal pl-6 my-4 space-y-2">{children}</ol>,
   },
   listItem: {
     bullet: ({ children }) => <li className="mb-1">{children}</li>,
-    // number: ({children}) => <li className="mb-1">{children}</li>,
   },
 };
 
@@ -102,11 +92,10 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  // Garantir que Post está sendo importado corretamente
   const post: Post | null = await getPostBySlug(params.slug);
 
   if (!post) {
-    notFound(); // Retorna página 404 se o post não for encontrado
+    notFound();
   }
 
   const formattedDate = post.publishedAt
@@ -121,15 +110,11 @@ export default async function PostPage({
         style={{ backgroundColor: "#dfccb8" }}
       >
         <div className="container mx-auto px-4 max-w-3xl">
-          {" "}
-          {/* Limitado largura para leitura */}
           <article>
             <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-foreground text-balance">
               {post.title}
             </h1>
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-8">
-              {" "}
-              {/* Adicionado flex-wrap */}
               <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
                 {post.category || "Categoria"}
               </span>
@@ -139,13 +124,23 @@ export default async function PostPage({
               </div>
             </div>
 
-            {/* <-- 2. ADICIONAR O COMPONENTE AQUI --> */}
-            <ShareButtons title={post.title} summary={post.excerpt} />
+            {/* --- SEÇÃO DE AÇÕES (CURTIR/COMPARTILHAR) ATUALIZADA --- */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 my-8 border-y border-border/50 py-5">
+              {/* Lado Esquerdo: Curtidas */}
+              <LikeButton postId={post._id} initialLikes={post.likes ?? 0} />
+
+              {/* Lado Direito: Compartilhamento */}
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-muted-foreground">
+                  Compartilhar:
+                </span>
+                <ShareButtons title={post.title} summary={post.excerpt} />
+              </div>
+            </div>
+            {/* --- FIM DA SEÇÃO ATUALIZADA --- */}
 
             {post.mainImage && (
               <div className="relative mb-8 aspect-[16/9] rounded-lg overflow-hidden">
-                {" "}
-                {/* Proporção comum */}
                 <Image
                   src={urlFor(post.mainImage)
                     .width(1200)
@@ -156,7 +151,7 @@ export default async function PostPage({
                   alt={post.title || "Imagem principal"}
                   fill
                   className="object-cover"
-                  priority // Carrega a imagem principal mais rápido
+                  priority
                   sizes="(max-width: 768px) 100vw, 800px"
                 />
               </div>
@@ -175,7 +170,7 @@ export default async function PostPage({
   );
 }
 
-// Opcional: Adicionar Metadata dinâmica
+// Metadata (sem alteração)
 export async function generateMetadata({
   params,
 }: {
