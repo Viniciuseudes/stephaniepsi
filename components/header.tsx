@@ -1,3 +1,4 @@
+// components/header.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -30,9 +31,12 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+        // --- AJUSTE AQUI ---
+        // Adiciona 'isMobileMenuOpen' à condição
+        isScrolled || isMobileMenuOpen
           ? "bg-background/95 backdrop-blur-md shadow-md"
           : "bg-transparent"
+        // --- FIM DO AJUSTE ---
       }`}
     >
       <div className="container mx-auto px-4 py-4">
@@ -86,7 +90,9 @@ export function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation 
+          Esta seção agora será exibida sobre o fundo sólido do header
+        */}
         {isMobileMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 flex flex-col gap-4 animate-in slide-in-from-top">
             {navItems.map((item) => (

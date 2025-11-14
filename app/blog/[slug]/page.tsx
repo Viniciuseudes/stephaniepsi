@@ -16,6 +16,17 @@ import type { Post } from "@/types";
 import type { Image as SanityImage } from "@sanity/types";
 import { ShareButtons } from "@/components/share-buttons";
 import { LikeButton } from "@/components/like-button";
+// --- ADIÇÃO DE IMPORTS ---
+import Link from "next/link";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+// --- FIM DA ADIÇÃO ---
 
 // Gera as rotas estáticas para cada post no build time
 export async function generateStaticParams() {
@@ -23,7 +34,7 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-// Componentes do PortableText (sem alteração)
+// Componentes do PortableText
 const ptComponents: Partial<PortableTextReactComponents> = {
   types: {
     image: ({ value }: { value: SanityImage & { alt?: string } }) => {
@@ -143,6 +154,30 @@ export default async function PostPage({
         style={{ backgroundColor: "#dfccb8" }}
       >
         <div className="container mx-auto px-4 max-w-3xl">
+          {/* --- ADIÇÃO DOS BREADCRUMBS --- */}
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/blog">Blog</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage className="truncate max-w-48 sm:max-w-none">
+                  {post.title}
+                </BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          {/* --- FIM DA ADIÇÃO --- */}
+
           <article>
             {/* --- AJUSTE: Inserindo o script JSON-LD --- */}
             <script

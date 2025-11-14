@@ -9,10 +9,20 @@ import { getAllBlogPosts } from "@/lib/sanity.queries"; // Importar função de 
 import { urlFor } from "@/lib/sanity.client"; // Importar helper de imagem
 import { format } from "date-fns"; // Para formatar datas
 import { ptBR } from "date-fns/locale"; // Para formato brasileiro
+// --- ADIÇÃO DE IMPORTS ---
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+// --- FIM DA ADIÇÃO ---
 
 // Componente reutilizável para o card do post
 function BlogPostCard({ post }: { post: any }) {
-  // Use 'any' por enquanto ou importe o tipo Post
+  // ... (código do card sem alteração) ...
   const formattedDate = post.publishedAt
     ? format(new Date(post.publishedAt), "d 'de' MMMM, yyyy", { locale: ptBR })
     : "Data inválida";
@@ -67,7 +77,23 @@ export default async function BlogPage() {
       >
         {" "}
         {/* Aumentado pt */}
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* --- ADIÇÃO DOS BREADCRUMBS --- */}
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Blog</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          {/* --- FIM DA ADIÇÃO --- */}
+
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-12 text-foreground">
             Blog
           </h1>
